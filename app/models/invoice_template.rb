@@ -1,0 +1,2 @@
+class InvoiceTemplate < ApplicationRecord
+end

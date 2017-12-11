@@ -1,0 +1,21 @@
+<%= form_for @invoice do |f| %>
+  <%= f.label 'Invoice number' %>
+  <%= f.number_field :number %><br />
+
+  <%= f.label 'Unit price eur: ' %>
+  <%= f.number_field :unit_price_eur %><br />
+  
+  <%= f.label 'Workdays: ' %>
+  <%= f.number_field :workdays %><br />
+  
+  <%= f.label 'Workdays total' %>
+  <%= f.number_field :workdays_total %><br />
+  
+  <%= f.label 'Date: ' %>
+  <%= f.date_field :date %><br />
+  
+  <%= f.label 'Template' %><br />
+  <%= f.select :invoice_template_id, options_for_select(InvoiceTemplate.all.map{|it|[it.name, it.id]}) %>
+  
+  <%= f.submit %>
+<% end %>

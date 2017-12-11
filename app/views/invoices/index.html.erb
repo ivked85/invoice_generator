@@ -1,0 +1,9 @@
+List of invoices:
+
+<ul>
+  <% @invoices.each do |invoice| %>
+    <%= link_to invoice.number, invoice %>
+  <% end %>
+</ul>
+
+<%= link_to "Add new", new_invoice_path %>

@@ -1,0 +1,9 @@
+Invoice templates:
+
+<ul>
+  <% @invoice_templates.each do |invoice_template| %>
+     <li><%= link_to invoice_template.name, invoice_template %></li>
+  <%end %>
+</ul>
+
+<%= link_to 'add new', new_invoice_template_path %>

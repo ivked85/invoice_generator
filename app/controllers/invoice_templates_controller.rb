@@ -1,6 +1,10 @@
 class InvoiceTemplatesController < ApplicationController
   before_action :find_invoice_template, only: [:show, :update]
   
+  def index
+    @invoice_templates = InvoiceTemplate.all
+  end
+  
   def new
     @invoice_template = InvoiceTemplate.new
   end

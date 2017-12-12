@@ -23,7 +23,11 @@ class Invoice < ApplicationRecord
   end
   
   def get_kurs
-    self.kurs_eur ||= 120
+    api_key = 'b430f7d843dedf4bb78f28f3d5507281'
+    url = "https://api.kursna-lista.info/#{api_key}/kl_na_dan/#{date.strftime('%d.%m.%Y')}/xml"
+    response = RestClient::Request.execute method: :get, url: url
+    h = Hash.from_xml response
+    self.kurs_eur = h["kursnalista"]["valuta"].find { |v| v["oznaka"] == "eur"  }["sre"].to_f
   end
   
   def format_property property

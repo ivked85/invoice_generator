@@ -7,7 +7,12 @@ end
 
 # Rtf editor
 gem "wysiwyg-rails"
+
+# Font awesome
 gem "font-awesome-rails"
+
+# Rest client
+gem 'rest-client'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

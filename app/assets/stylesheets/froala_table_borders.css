@@ -1,0 +1,5 @@
+.fr-view table.fr-no-borders td, .fr-view table.fr-no-borders th
+{
+  border: none;
+  outline: none;  
+}

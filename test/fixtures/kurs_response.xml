@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kursnalista datum="04.04.2016">
+	<valuta oznaka="eur" kup="122.4215" sre="122.7899" pro="123.1583" />
+	<valuta oznaka="usd" kup="107.5382" sre="107.8618" pro="108.1854" />
+	<valuta oznaka="chf" kup="112.0563" sre="112.3935" pro="112.7307" />
+	<valuta oznaka="gbp" kup="152.874" sre="153.334" pro="153.794" />
+	<valuta oznaka="aud" kup="82.03" sre="82.2768" pro="82.5236" />
+	<valuta oznaka="cad" kup="82.3833" sre="82.6312" pro="82.8791" />
+	<valuta oznaka="sek" kup="13.2111" sre="13.2509" pro="13.2907" />
+	<valuta oznaka="dkk" kup="16.4298" sre="16.4792" pro="16.5286" />
+	<valuta oznaka="nok" kup="12.9169" sre="12.9558" pro="12.9947" />
+	<valuta oznaka="jpy" kup="0.964177" sre="0.967078" pro="0.969979" />
+	<valuta oznaka="rub" kup="1.5877" sre="1.5925" pro="1.5973" />
+	<valuta oznaka="cny" kup="16.5921" sre="16.642" pro="16.6919" />
+	<valuta oznaka="hrk" kup="" sre="16.3543" pro="" />
+	<valuta oznaka="kwd" kup="" sre="357.467" pro="" />
+	<valuta oznaka="pln" kup="" sre="28.8639" pro="" />
+	<valuta oznaka="czk" kup="" sre="4.5389" pro="" />
+	<valuta oznaka="huf" kup="" sre="0.3911" pro="" />
+	<valuta oznaka="bam" kup="" sre="62.7815" pro="" />
+</kursnalista>

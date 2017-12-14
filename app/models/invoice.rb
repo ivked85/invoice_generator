@@ -2,7 +2,7 @@ class Invoice < ApplicationRecord
   belongs_to :invoice_template
   
   validates :workdays, :workdays_total, :unit_price_eur, 
-            :kurs_eur, :number, presence: true
+            :kurs_eur, :date, :number, presence: true
   
   before_validation :get_kurs
   before_save :calculate, :generate_template

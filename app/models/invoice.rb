@@ -1,11 +1,12 @@
 class Invoice < ApplicationRecord
+  include PropertyFormatters
+  
   belongs_to :invoice_template
   
   validates :workdays, :workdays_total, :unit_price_eur, 
-            :kurs_eur, :date, :number, presence: true
+            :date, :number, presence: true
   
-  before_validation :get_kurs
-  before_save :calculate, :generate_template
+  before_save :get_kurs, :calculate, :generate_template
   
   
   def calculate
@@ -17,7 +18,7 @@ class Invoice < ApplicationRecord
   def generate_template
     template = invoice_template.template
     template.gsub!(/{{.*?}}/) do |match|
-      format_property match[2..-3]
+      format_property self.send(match[2..-3])
     end
     self.template = template
   end
@@ -28,29 +29,5 @@ class Invoice < ApplicationRecord
     response = RestClient::Request.execute method: :get, url: url
     h = Hash.from_xml response
     self.kurs_eur = h["kursnalista"]["valuta"].find { |v| v["oznaka"] == "eur"  }["sre"].to_f
-  end
-  
-  def format_property property
-    if is_price? property
-      return to_price(self.send(property))
-    elsif is_date? property
-      self.send(property).strftime('%d.%m.%Y')
-    else
-      self.send(property).to_s
-    end
-  end
-  
-  def is_price? property
-    property.include? 'price'
-  end
-  
-  def is_date? property
-    self.send(property).methods.include? :strftime
-  end
-  
-  def to_price number
-    ActionController::Base.helpers.number_with_delimiter number, 
-                                                          delimiter: '.', 
-                                                          separator: ','
   end
 end

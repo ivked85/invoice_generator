@@ -3,14 +3,14 @@ class CreateInvoices < ActiveRecord::Migration[5.0]
     create_table :invoices do |t|
       t.decimal :kurs_eur
       t.decimal :base_price
-      t.string :unit_price_eur
-      t.string :unit_price_rsd
-      t.string :price_eur
-      t.string :price_rsd
+      t.decimal :unit_price_eur
+      t.decimal :unit_price_rsd
+      t.decimal :price_eur
+      t.decimal :price_rsd
       t.integer :workdays
       t.integer :workdays_total
       t.integer :number
-      t.string :date
+      t.datetime :date
       t.text    :template
       
       t.references :invoice_template, index: true

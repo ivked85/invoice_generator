@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171209114632) do
 
   create_table "invoices", force: :cascade do |t|
     t.decimal  "kurs_eur"
+    t.decimal  "base_price"
     t.decimal  "unit_price_eur"
     t.decimal  "unit_price_rsd"
     t.decimal  "price_eur"

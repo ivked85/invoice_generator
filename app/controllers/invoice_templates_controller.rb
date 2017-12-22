@@ -24,7 +24,7 @@ class InvoiceTemplatesController < ApplicationController
   end
   
   def invoice_template_attributes
-    params.require(:invoice_template).permit(:template)
+    params.require(:invoice_template).permit(:template, :name)
   end
   
   private

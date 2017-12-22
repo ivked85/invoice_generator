@@ -3,6 +3,7 @@
     <!-- Create a tag that we will use as the editable area. -->
     <!-- You can use a div tag as well. -->
   <%= form_for @invoice_template do |f| %>
+    Name: <%= f.text_field :name %><br />
     Template : <%= f.text_area :template %><br />
     <%= f.submit %>
   <% end %>

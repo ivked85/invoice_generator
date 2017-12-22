@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: invoice_generator_production
   username: invoice_generator
   password: <%= ENV['INVOICE_GENERATOR_DATABASE_PASSWORD'] %>

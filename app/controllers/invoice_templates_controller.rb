@@ -23,6 +23,11 @@ class InvoiceTemplatesController < ApplicationController
     redirect_to @invoice_template
   end
   
+  def destroy
+    @invoice_template.destroy
+    redirect_to @invoice_template
+  end
+  
   def invoice_template_attributes
     params.require(:invoice_template).permit(:template, :name)
   end

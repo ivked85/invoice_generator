@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :find_invoice, only: :show
+  before_action :find_invoice, only: [:show, :destroy]
   
   def index
     @invoices = Invoice.all
@@ -16,6 +16,11 @@ class InvoicesController < ApplicationController
   end
   
   def show
+  end
+  
+  def destroy
+    @invoice.destroy
+    redirect_to @invoice
   end
   
   def invoice_attributes

@@ -7,6 +7,10 @@
     Template : <%= f.text_area :template %><br />
     <%= f.submit %>
   <% end %>
+  
+  <%= link_to 'Destroy', invoice_template_path(@invoice_template),
+                         method: :delete, 
+                         data: { confirm: 'Are you sure?' }%>
     
     
  

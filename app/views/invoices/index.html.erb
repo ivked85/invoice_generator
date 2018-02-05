@@ -1,9 +1,29 @@
 List of invoices:
 
-<ul>
-  <% @invoices.each do |invoice| %>
-    <%= link_to invoice.number, invoice %>
-  <% end %>
-</ul>
+<div class="invoice-list">
+  <table>
+    <th>invoice number</th>
+    <th>invoice date</th>
+    <th>amount eur</th>
+    <th>amount rsd</th>
+    <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= link_to invoice.number, invoice %></td>
+        <td><%= invoice.print_date %></td>
+        <td><%= invoice.price_eur %></td>
+        <td><%= invoice.price_rsd %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>TOTAL:</td>
+      <td></td>
+      <td><%= @invoices.sum(:price_eur) %></td>
+      <td><%= @invoices.sum(:price_rsd) %></td>
+      
+    </tr>
+  </table>
+</div>
 
-<%= link_to "Add new", new_invoice_path %>
+<div class="available-actions">
+  <%= link_to "Add new", new_invoice_path %>
+</div>

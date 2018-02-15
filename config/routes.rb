@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   
   resources :invoices
   resources :invoice_templates
+
 end

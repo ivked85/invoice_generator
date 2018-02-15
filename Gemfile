@@ -5,8 +5,16 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Authentication
+gem 'devise'
+
+# Styling
+gem 'bootstrap-sass'
+
 # Rtf editor
 gem "wysiwyg-rails"
+# Excel documents support
+gem 'spreadsheet'
 
 # Font awesome
 gem "font-awesome-rails"

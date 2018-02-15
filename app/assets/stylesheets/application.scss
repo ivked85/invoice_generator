@@ -16,3 +16,7 @@
  *= require font-awesome
  *= require rtf_editor.scss
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import 'bootstrap/theme';

@@ -6,8 +6,9 @@ class Invoice < ApplicationRecord
   validates :workdays, :workdays_total, :unit_price_eur, 
             :date, :number, presence: true
   
-  before_save :get_kurs, :calculate, :generate_template
+  before_create :get_kurs, :calculate, :generate_template
   
+private
   
   def calculate
     self.unit_price_rsd = (unit_price_eur * kurs_eur).to_f.round(2)
@@ -29,11 +30,5 @@ class Invoice < ApplicationRecord
     response = RestClient::Request.execute method: :get, url: url
     h = Hash.from_xml response
     self.kurs_eur = h["kursnalista"]["valuta"].find { |v| v["oznaka"] == "eur"  }["sre"].to_f
-  end
-  
-  def method_missing(name, *args, &block)
-    # adds dynamic format_{property} methods
-    return format_property self.send(name[10..-1]) if name =~ %r{^format_} 
-    super
   end
 end

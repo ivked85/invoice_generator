@@ -10,6 +10,7 @@ gem 'devise'
 
 # Styling
 gem 'bootstrap-sass'
+gem 'jquery-turbolinks'
 
 # Rtf editor
 gem "wysiwyg-rails"

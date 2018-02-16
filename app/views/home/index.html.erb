@@ -1,4 +1,17 @@
-<h1>Invoice generator</h1>
-
-<p><%= link_to 'invoices', invoices_path %></p>
-<p><%= link_to 'invoice templates', invoice_templates_path %></p>
+<% content_for :top_content do %>
+  <div class="jumbotron">
+    <div class="container">
+      <% if user_signed_in? %>
+        <h1>Invoice generator</h1>
+        <p><%= link_to 'invoices', invoices_path %></p>
+        <p><%= link_to 'invoice templates', invoice_templates_path %></p>
+      <% else %>
+        <h1>Welcome!</h1>
+        <p>Register to get started</p>
+        <p>
+          <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+        </p>
+      <% end %>
+    </div>
+  </div>  
+<% end %>

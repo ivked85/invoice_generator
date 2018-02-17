@@ -1,8 +1,8 @@
 class InvoiceTemplatesController < ApplicationController
-  before_action :find_invoice_template, only: [:show, :update]
+  before_action :find_invoice_template, only: [:show, :update, :destroy]
   
   def index
-    @invoice_templates = InvoiceTemplate.all
+    @invoice_templates = InvoiceTemplate.where(user_id: current_user.id).all
   end
   
   def new
@@ -25,11 +25,11 @@ class InvoiceTemplatesController < ApplicationController
   
   def destroy
     @invoice_template.destroy
-    redirect_to @invoice_template
+    redirect_to invoice_templates_path
   end
   
   def invoice_template_attributes
-    params.require(:invoice_template).permit(:template, :name)
+    params.require(:invoice_template).permit(:template, :name).merge(user_id: current_user.id)
   end
   
   private

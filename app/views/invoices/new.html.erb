@@ -15,7 +15,7 @@
   <%= f.date_field :date %><br />
   
   <%= f.label 'Template' %><br />
-  <%= f.select :invoice_template_id, options_for_select(InvoiceTemplate.all.map{|it|[it.name, it.id]}) %>
+  <%= f.select :invoice_template_id, options_for_select(InvoiceTemplate.where(user_id: current_user.id).all.map{|it|[it.name, it.id]}) %>
   
   <%= f.submit %>
 <% end %>

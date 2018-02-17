@@ -2,7 +2,7 @@ class InvoicesController < ApplicationController
   before_action :find_invoice, only: [:show, :update, :destroy]
   
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.where(user_id: current_user.id).all
   end
   
   def new
@@ -33,11 +33,11 @@ class InvoicesController < ApplicationController
   
   def invoice_params
     params.require(:invoice).permit(:unit_price_eur, :workdays_total, :date,
-                                    :invoice_template_id, :workdays, :number)
+                                    :invoice_template_id, :workdays, :number).merge(user_id: current_user.id)
   end
   
   def invoice_update_params
-    params.require(:invoice).permit(:template)
+    params.require(:invoice).permit(:template).merge(user_id: current_user.id)
   end
   
   def find_invoice

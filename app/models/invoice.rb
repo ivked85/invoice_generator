@@ -55,7 +55,7 @@ private
   end
   
   def set_number
-    (self.number = user.invoices.maximum(:number) || 0) + 1
+    self.number = (user.invoices.maximum(:number) || 0) + 1
   end
   
   def set_date

@@ -1,5 +1,6 @@
 class Invoice < ApplicationRecord
   include PropertyFormatters
+  include Workdays
   
   belongs_to :invoice_template
   belongs_to :user
@@ -63,26 +64,11 @@ private
   end
   
   def set_workdays_total
-    invoice_date = Date.new(date.year, date.month, date.day)
-    first_day_of_month = invoice_date.change(day: 1)
-    last_day_of_month = invoice_date.change(day: -1)
-    
-    workdays_total = 0
-    
-    (first_day_of_month..last_day_of_month).each do |day|
-      workdays_total += 1 unless is_holiday? day
-    end
-    
-    self.workdays_total = workdays_total
+    self.workdays_total = workdays_for date
   end
   
   # TODO: implement free days
   def set_workdays
     self.workdays = workdays_total
-  end
-  
-  def is_holiday? day
-    return true if day.cwday.in? [6, 7]
-    return Holiday.where(date: day).any?
   end
 end

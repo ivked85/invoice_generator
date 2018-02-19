@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219125908) do
+ActiveRecord::Schema.define(version: 20180219144012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180219125908) do
     t.integer  "workdays"
     t.integer  "workdays_total"
     t.integer  "number"
-    t.datetime "date"
+    t.date     "date"
     t.text     "template"
     t.integer  "invoice_template_id"
     t.datetime "created_at",          null: false

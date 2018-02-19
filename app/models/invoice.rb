@@ -8,9 +8,17 @@ class Invoice < ApplicationRecord
   validates :workdays, :workdays_total, :unit_price_eur, 
             :date, :number, presence: true
   
-  after_initialize :build_fields
-  
   before_create :get_kurs, :calculate, :generate_template
+  
+  def set_fields
+    set_template
+    set_number
+    set_unit_price_eur
+    set_date
+    self.workdays_total ||= workdays_for date
+    self.workdays ||= workdays_total
+    self
+  end
   
 private
   
@@ -34,17 +42,6 @@ private
     response = RestClient::Request.execute method: :get, url: url
     h = Hash.from_xml response
     self.kurs_eur = h["kursnalista"]["valuta"].find { |v| v["oznaka"] == "eur"  }["sre"].to_f
-  end
-  
-  def build_fields
-    return unless self.new_record?
-    set_template
-    set_number
-    set_unit_price_eur
-    set_date
-    set_workdays_total
-    set_workdays
-    
   end
   
   def set_template

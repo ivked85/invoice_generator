@@ -1,9 +1,19 @@
-Invoice templates:
-
-<ul>
-  <% @invoice_templates.each do |invoice_template| %>
-     <li><%= link_to invoice_template.name, invoice_template %></li>
-  <%end %>
-</ul>
-
-<%= link_to 'add new', new_invoice_template_path %>
+<div class="container">
+  <h2>Invoice templates</h2>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Template</th>
+      </tr>
+    </thead>
+    <% @invoice_templates.each do |invoice_template| %>
+      <tr>
+        <td><%= link_to invoice_template.name, invoice_template %></td>
+      </tr>
+    <%end %>
+    
+    
+  </table>
+  <%= link_to 'add new', new_invoice_template_path, class: 'btn btn-primary' %>
+</div>

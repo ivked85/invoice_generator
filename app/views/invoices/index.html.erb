@@ -1,29 +1,36 @@
-List of invoices:
-
-<div class="invoice-list">
-  <table>
-    <th>invoice number</th>
-    <th>invoice date</th>
-    <th>amount eur</th>
-    <th>amount rsd</th>
-    <% @invoices.each do |invoice| %>
-      <tr>
-        <td><%= link_to invoice.number, invoice %></td>
-        <td><%= invoice.print_date %></td>
-        <td><%= invoice.price_eur %></td>
-        <td><%= invoice.price_rsd %></td>
-      </tr>
-    <% end %>
-    <tr>
-      <td>TOTAL:</td>
-      <td></td>
-      <td><%= @invoices.sum(:price_eur) %></td>
-      <td><%= @invoices.sum(:price_rsd) %></td>
-      
-    </tr>
-  </table>
+<div class="container">
+  <div class="invoice-list">
+    <h2>List of invoices</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>invoice number</th>
+          <th>invoice date</th>
+          <th>amount eur</th>
+          <th>amount rsd</th>
+        </tr>
+      </thead>
+      <% @invoices.each do |invoice| %>
+        <tr>
+          <td><%= link_to invoice.number, invoice %></td>
+          <td><%= invoice.print_date %></td>
+          <td><%= invoice.print_price_eur %></td>
+          <td><%= invoice.print_price_rsd %></td>
+        </tr>
+      <% end %>
+      <tfoot>
+        <tr>
+          <td>TOTAL:</td>
+          <td></td>
+          <td><%= format_property @invoices.sum(:price_eur) %></td>
+          <td><%= format_property @invoices.sum(:price_rsd) %></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  
+  <div class="available-actions">
+    <%= link_to "Add new", new_invoice_path, class: 'btn btn-primary' %>
+  </div>
 </div>
 
-<div class="available-actions">
-  <%= link_to "Add new", new_invoice_path %>
-</div>

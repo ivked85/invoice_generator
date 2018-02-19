@@ -10,17 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216231150) do
+ActiveRecord::Schema.define(version: 20180219125908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "holidays", force: :cascade do |t|
+    t.string "name"
+    t.date   "date"
+  end
+
   create_table "invoice_templates", force: :cascade do |t|
     t.string   "name"
     t.text     "template"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
+    t.decimal  "unit_price_eur"
     t.index ["user_id"], name: "index_invoice_templates_on_user_id", using: :btree
   end
 
@@ -40,6 +46,8 @@ ActiveRecord::Schema.define(version: 20180216231150) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.integer  "user_id"
+    t.date     "from_period"
+    t.date     "to_period"
     t.index ["invoice_template_id"], name: "index_invoices_on_invoice_template_id", using: :btree
     t.index ["user_id"], name: "index_invoices_on_user_id", using: :btree
   end

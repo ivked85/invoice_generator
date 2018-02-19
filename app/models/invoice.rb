@@ -2,9 +2,12 @@ class Invoice < ApplicationRecord
   include PropertyFormatters
   
   belongs_to :invoice_template
+  belongs_to :user
   
   validates :workdays, :workdays_total, :unit_price_eur, 
             :date, :number, presence: true
+  
+  after_initialize :build_fields
   
   before_create :get_kurs, :calculate, :generate_template
   
@@ -30,5 +33,56 @@ private
     response = RestClient::Request.execute method: :get, url: url
     h = Hash.from_xml response
     self.kurs_eur = h["kursnalista"]["valuta"].find { |v| v["oznaka"] == "eur"  }["sre"].to_f
+  end
+  
+  def build_fields
+    return unless self.new_record?
+    set_template
+    set_number
+    set_unit_price_eur
+    set_date
+    set_workdays_total
+    set_workdays
+    
+  end
+  
+  def set_template
+    self.invoice_template = user.invoice_templates.first
+  end
+  
+  def set_unit_price_eur
+    self.unit_price_eur = invoice_template.unit_price_eur
+  end
+  
+  def set_number
+    self.number = user.invoices.maximum(:number) + 1
+  end
+  
+  def set_date
+    self.date = DateTime.now.to_date
+  end
+  
+  def set_workdays_total
+    invoice_date = Date.new(date.year, date.month, date.day)
+    first_day_of_month = invoice_date.change(day: 1)
+    last_day_of_month = invoice_date.change(day: -1)
+    
+    workdays_total = 0
+    
+    (first_day_of_month..last_day_of_month).each do |day|
+      workdays_total += 1 unless is_holiday? day
+    end
+    
+    self.workdays_total = workdays_total
+  end
+  
+  # TODO: implement free days
+  def set_workdays
+    self.workdays = workdays_total
+  end
+  
+  def is_holiday? day
+    return true if day.cwday.in? [6, 7]
+    return Holiday.where(date: day).any?
   end
 end

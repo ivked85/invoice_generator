@@ -6,7 +6,7 @@ class InvoicesController < ApplicationController
   end
   
   def new
-    @invoice = Invoice.new
+    @invoice = current_user.invoices.build
   end
   
   def create

@@ -29,7 +29,7 @@ class InvoiceTemplatesController < ApplicationController
   end
   
   def invoice_template_attributes
-    params.require(:invoice_template).permit(:template, :name).merge(user_id: current_user.id)
+    params.require(:invoice_template).permit(:template, :name, :unit_price_eur).merge(user_id: current_user.id)
   end
   
   private

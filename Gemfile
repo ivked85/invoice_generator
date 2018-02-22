@@ -18,10 +18,15 @@ gem "wysiwyg-rails"
 gem 'spreadsheet'
 
 # Font awesome
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
 
 # Rest client
 gem 'rest-client'
+
+# Sendgrid API
+gem 'sendgrid-ruby'
+gem 'sendgrid-actionmailer'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

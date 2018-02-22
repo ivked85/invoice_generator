@@ -1,5 +1,5 @@
 class InvoicesController < ApplicationController
-  before_action :find_invoice, only: [:show, :update, :destroy]
+  before_action :find_invoice, only: [:show, :update, :destroy, :preview]
   
   def index
     @invoices = Invoice.where(user_id: current_user.id).all
@@ -30,6 +30,12 @@ class InvoicesController < ApplicationController
     @invoice.destroy
     redirect_to @invoice
   end
+  
+  def preview
+    render inline: @invoice.template
+  end
+  
+private
   
   def invoice_params
     params.require(:invoice).permit(:unit_price_eur, :workdays_total, :date,

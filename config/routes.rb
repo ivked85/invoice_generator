@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root "home#index"
   
   authenticate :user do
-    resources :invoices
+    resources :invoices do
+      get :preview, on: :member
+    end
     resources :invoice_templates
   end
 end
